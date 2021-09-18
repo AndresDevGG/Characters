@@ -1,0 +1,111 @@
+    <img *ngIf="type != 'create'" src="{{path}}" class="img-character" alt="User Avatar">
+    <form [formGroup]="characterForm">
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Nombre</mat-label>
+          <input type="text" matInput formControlName="Name" autocomplete="off">
+          <mat-error *ngIf="characterForm.controls.Name.hasError('required')">
+            El nombre es <strong>requerido</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Rol</mat-label>
+          <mat-select formControlName="Role">
+            <mat-option *ngFor="let item of roles" [value]="item">{{item}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="characterForm.controls.Role.hasError('required')">
+            El rol es <strong>requerido</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-12">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Descripción del rol</mat-label>
+          <textarea
+            formControlName="RoleDescription"
+            cols="30"
+            rows="2"
+            matInput
+            autocomplete="off"
+          ></textarea>
+          <mat-error *ngIf="characterForm.controls.RoleDescription.hasError('required')">
+            La descripción del rol es <strong>requerida</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Edad</mat-label>
+          <input type="number" matInput formControlName="Age" autocomplete="off" min="0">
+          <mat-error *ngIf="characterForm.controls.Age.hasError('required')">
+            La edad es <strong>requerida</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Personalidad</mat-label>
+          <mat-select formControlName="Personality">
+            <mat-option *ngFor="let item of personalities" [value]="item">{{item}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="characterForm.controls.Personality.hasError('required')">
+            Lan personalidad es <strong>requerido</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-12">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Habilidades</mat-label>
+          <textarea
+            formControlName="Habilities"
+            cols="30"
+            rows="2"
+            matInput
+            autocomplete="off"
+          ></textarea>
+          <mat-error *ngIf="characterForm.controls.Habilities.hasError('required')">
+            Las habilidades son <strong>requeridas</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Custom calendar color</mat-label>
+          <input matInput [matDatepicker]="picker2" formControlName="CreatedAt">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2 color="primary"></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Nombre del creador</mat-label>
+          <input type="text" matInput formControlName="NameCreator" autocomplete="off">
+          <mat-error *ngIf="characterForm.controls.NameCreator.hasError('required')">
+            El nombre del creador es <strong>requerido</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <ngx-dropzone (change)="onSelect($event)" accept="image/jpeg,image/jpg,image/png,image" [multiple]="false" [maxFileSize]="2000000">
+          <ngx-dropzone-label>Seleccione o arrastre imagen</ngx-dropzone-label>
+          <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+            <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
+          </ngx-dropzone-image-preview>
+        </ngx-dropzone>
+      </div>
+      <div class="col-md-3"></div>
+      <div class="col-md-4">
+        <button *ngIf="type !== 'create'" class="btn-primary-cs" mat-raised-button (click)="close()">Cerrar</button>
+      </div>
+      <div class="col-md-4">
+        <button class="btn-primary-cs" mat-raised-button color="primary" (click)="saveCharacter()">{{ type === 'create' ? 'Guardar' : 'Actualizar'}}</button>
+      </div>
+      <div class="col-md-4">
+        <button *ngIf="type !== 'create'" class="btn-primary-cs" mat-raised-button color="warn" (click)="delete()">Eliminar</button>
+      </div>
+    </div>
+  </form>
