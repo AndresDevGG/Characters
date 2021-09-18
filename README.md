@@ -1,4 +1,4 @@
-# Prueba tcnica
+# Prueba técnica
 Para ejecutar este proyecto debes tener previamente instalado Node y Angular en la version 12.2.6, debes de 
 instalar sus dependencias con el comando 'npm i' y luego de esto ejecutarla con el comando 'ng serve', esto levanta un servidor local en el puerto 4200 'http://localhost:4200'
 # Versiones
